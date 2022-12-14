@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer:latest
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+      - "9000:9000"
+    command: --admin-password '${PASSWORD_ADMIN}'
+    networks:
+      - local
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data portainer/portainer-ee:latest
+volumes:
+  portainer_data:
+networks:
+  local:
+    driver: bridge
